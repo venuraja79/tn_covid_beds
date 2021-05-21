@@ -15,6 +15,7 @@ data_columns = ['District','latitude','longitude','COVID BEDS_Vacant']
 
 data = df[data_columns]
 data.loc[:,"Value"] = data.loc[:, "COVID BEDS_Vacant"]
+print(data.head(1))
 
 districts = data['District'].unique()
 selected_district = st.sidebar.selectbox("Select a District to see Hospital level beds", districts)
