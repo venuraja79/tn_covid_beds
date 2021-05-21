@@ -1,7 +1,2 @@
-Flask
-requests
-numpy
-sklearn
-tqdm
 pandas
-gunicorn
+streamlit
