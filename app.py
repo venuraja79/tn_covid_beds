@@ -4,18 +4,39 @@ import pandas as pd
 import streamlit as st
 import pydeck as pdk
 
+st.set_page_config(
+    layout="wide",
+    page_title="TN Hospital Beds",
+)
+
+st.header("Tamil Nadu Hospital Bed Availability Status")
+
+try:
+    import os
+    import time
+    last_run = os.path.getmtime("tn_covid_beds.csv")
+    last_run = time.strftime('%d-%m-%Y %H:%M:%S', time.gmtime(last_run))
+    st.sidebar.markdown(f"Last Run : {last_run} GMT")
+except:
+    pass
+
 st.sidebar.header('About')
 st.sidebar.info('Tamil Nadu Hospitals Corona Bed Status. The data is sourced from https://stopcorona.tn.gov.in/beds.php \n\n' + \
-    'Contact: http://sol-ai.in/\n')
+    'Contact: http://sol-ai.in/')
+st.sidebar.markdown('GitHub [Link](https://github.com/venuraja79/tn_covid_beds)')
 
-df = pd.read_csv("tn_covid_district_beds.csv")
-df_hospital = pd.read_csv("tn_covid_beds.csv")
+@st.cache
+def load_tn_data():
+    df = pd.read_csv("tn_covid_district_beds.csv")
+    df_hospital = pd.read_csv("tn_covid_beds.csv")
+    return df, df_hospital
+
+df, df_hospital = load_tn_data()
 
 data_columns = ['District','latitude','longitude','COVID BEDS_Vacant']
 
 data = df[data_columns]
 data.loc[:,"Value"] = data.loc[:, "COVID BEDS_Vacant"]
-print(data.head(1))
 
 districts = data['District'].unique()
 selected_district = st.sidebar.selectbox("Select a District to see Hospital level beds", districts)
@@ -52,7 +73,6 @@ data.loc[:,'normValue'] = ((data.loc[:,'Value'] / (max - min))*radius_unit*radiu
 # calculate colour range mapping index to then assign fill colour
 data.loc[:,'fillColorIndex'] = ( (data.loc[:,'Value']-min) / (max-min) )*(len(COLOUR_RANGE) - 1)
 data.loc[:,'fill_color'] = data.loc[:,'fillColorIndex'].map(lambda x: COLOUR_RANGE[int(x)])
-
 
 st.pydeck_chart(pdk.Deck(
     map_style='mapbox://styles/mapbox/light-v9',
@@ -100,6 +120,11 @@ st.pydeck_chart(pdk.Deck(
 )
 
 if selected_district:
-    st.subheader(f"Beds in {selected_district} District:")
+    st.subheader(f"Hospital Level Status in {selected_district} District:")
     hosp_data = df_hospital[df_hospital['District'] == selected_district]
+    show_cols = ["Institution", "Contact Number","Last updated","COVID BEDS_Vacant", "ICU BEDS_Vacant", "VENTILATOR_Vacant", 
+             "OXYGEN SUPPORTED BEDS_Vacant", "NON-OXYGEN SUPPORTED BEDS_Vacant", "COVID BEDS_Total","ICU BEDS_Total","VENTILATOR_Total",
+            "OXYGEN SUPPORTED BEDS_Total", "NON-OXYGEN SUPPORTED BEDS_Total"]
+    hosp_data = hosp_data[show_cols]
+    hosp_data = hosp_data.sort_values(by=['Last updated','COVID BEDS_Vacant'], ascending=False)
     st.write(hosp_data)
