@@ -1,4 +1,3 @@
 
-# Thirukkural Search
+# Tamil Nadu COVID Bed Status
 
-Website to search Thirukkural. 
