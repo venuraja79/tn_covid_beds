@@ -1,0 +1,179 @@
+{
+    "geo_data": [
+        {
+            "latitude": 11.140059,
+            "longitude": 79.078629,
+            "district": "Ariyalur"
+        },
+        {
+            "latitude": 12.693620,
+            "longitude": 79.980499,
+            "district": "Chengalpattu"
+        },
+        {
+            "latitude": 13.082680,
+            "longitude": 80.270721,
+            "district": "Chennai"
+        },
+        {
+            "latitude": 12.834174,
+            "longitude": 79.703644,
+            "district": "Kancheepuram"
+        },
+        {
+            "latitude": 11.016844 ,
+            "longitude": 76.955833,
+            "district": "Coimbatore"
+        },
+        {
+            "latitude": 11.7424,
+            "longitude": 79.750593,
+            "district": "Cuddalore"
+        },
+        {
+            "latitude": 10.365545,
+            "longitude": 77.969573,
+            "district": "Dindigul"
+        },
+        {
+            "latitude": 11.330648,
+            "longitude": 77.727652,
+            "district": "Erode"
+        },
+        {
+            "latitude": 11.738115,
+            "longitude": 78.96379,
+            "district": "Kallakurichi"
+        },
+        {
+            "latitude": 8.079252,
+            "longitude": 77.549934,
+            "district": "Kanyakumari"
+        },
+        {
+            "latitude": 10.960405,
+            "longitude": 78.077561,
+            "district": "Karur"
+        },
+        {
+            "latitude": 12.512264,
+            "longitude": 78.223229,
+            "district": "Krishnagiri"
+        },
+        {
+            "latitude": 9.926115,
+            "longitude": 78.114098,
+            "district": "Madurai"
+        },
+        {
+            "latitude": 11.102139,
+            "longitude": 79.650007,
+            "district": "Mayiladuthurai"
+        },
+        {
+            "latitude": 11.219327,
+            "longitude": 78.167725,
+            "district": "Namakkal"
+        },
+        {
+            "latitude": 11.412677,
+            "longitude": 76.70305,
+            "district": "TheNilgiris"
+        },
+        {
+            "latitude": 11.23609,
+            "longitude": 78.868857,
+            "district": "Perambalur"
+        },
+        {
+            "latitude": 10.377866,
+            "longitude": 78.816704,
+            "district": "Pudukkottai"
+        },
+        {
+            "latitude": 9.365235,
+            "longitude": 78.834319,
+            "district": "Ramanathapuram"
+        },
+        {
+            "latitude": 11.65398,
+            "longitude": 78.160899,
+            "district": "Salem"
+        },
+        {
+            "latitude": 9.848688,
+            "longitude": 78.487046,
+            "district": "Sivagangai"
+        },
+        {
+            "latitude": 10.786069,
+            "longitude": 79.138128,
+            "district": "Thanjavur"
+        },
+        {
+            "latitude": 13.139436,
+            "longitude": 79.907304,
+            "district": "Tiruvallur"
+        },
+        {
+            "latitude": 12.234323,
+            "longitude": 79.076199,
+            "district": "Tiruvannamalai"
+        },
+        {
+            "latitude": 8.80537,
+            "longitude": 78.145187,
+            "district": "Thoothukudi"
+        },
+        {
+            "latitude": 8.729526,
+            "longitude": 77.685235,
+            "district": "Tirunelveli"
+        },
+        {
+            "latitude": 11.097142,
+            "longitude": 77.349205,
+            "district": "Tiruppur"
+        },
+        {
+            "latitude": 10.766174,
+            "longitude": 79.63443,
+            "district": "Thiruvarur"
+        },
+        {
+            "latitude": 10.7905,
+            "longitude": 78.7047,
+            "district": "Thiruchirappalli"
+        },
+        {
+            "latitude": 12.91642,
+            "longitude": 79.136194,
+            "district": "Vellore"
+        },
+        {
+            "latitude": 9.582192,
+            "longitude": 77.953871,
+            "district": "Virudhunagar"
+        },
+        {
+            "latitude": 10.764795,
+            "longitude": 79.843078,
+            "district": "Nagapattinam"
+        },
+        {
+            "latitude": 8.956037,
+            "longitude": 77.305816,
+            "district": "Tenkasi"
+        },
+        {
+            "latitude": 10.010814,
+            "longitude": 77.48101,
+            "district": "Theni"
+        },
+        {
+            "latitude": 12.684089,
+            "longitude": 79.983637,
+            "district": "Chengalpet"
+        }
+    ]
+}
