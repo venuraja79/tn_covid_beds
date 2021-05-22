@@ -1,2 +1,2 @@
-web: sh setup.sh && streamlit run app.py
-clock: python run.py
+web: sh setup.sh && streamlit run st_app.py
+

@@ -4,6 +4,8 @@ import pandas as pd
 import streamlit as st
 import pydeck as pdk
 
+from bed_data import refresh_data
+
 st.set_page_config(
     layout="wide",
     page_title="TN Hospital Beds",
@@ -11,30 +13,24 @@ st.set_page_config(
 
 st.header("Tamil Nadu Hospital Bed Availability Status")
 
+@st.cache
+def load_tamilnadu_data():
+    df, df_district, last_run = refresh_data()
+    return df, df_district, last_run
+
 try:
-    import os
-    import time
-    last_run = os.path.getmtime("tn_covid_beds.csv")
-    last_run = time.strftime('%d-%m-%Y %H:%M:%S', time.gmtime(last_run))
-    st.sidebar.markdown(f"Last Updated : {last_run} GMT")
+    df, df_district, last_run = load_tamilnadu_data()
 except:
-    pass
+    st.error("Unable to retrieve data!, Please try after sometime!!")
+st.sidebar.markdown(f"Last Updated : {last_run} GMT")
 
 st.sidebar.header('About')
 st.sidebar.info('Tamil Nadu Hospitals Corona Bed Status. The data is sourced from https://stopcorona.tn.gov.in/beds.php \n\n')
 st.sidebar.markdown('GitHub [Link](https://github.com/venuraja79/tn_covid_beds)')
 
-@st.cache
-def load_tn_data():
-    df = pd.read_csv("tn_covid_district_beds.csv")
-    df_hospital = pd.read_csv("tn_covid_beds.csv")
-    return df, df_hospital
-
-df, df_hospital = load_tn_data()
-
 data_columns = ['District','latitude','longitude','COVID BEDS_Vacant']
 
-data = df[data_columns]
+data = df_district[data_columns]
 data.loc[:,"Value"] = data.loc[:, "COVID BEDS_Vacant"]
 
 COLOUR_RANGE = [
@@ -120,12 +116,21 @@ selected_district = st.selectbox("Select a District to see Hospital level beds",
 covid_vacant = st.checkbox('Show only hospitals with vacant covid beds')
 if selected_district:
     st.subheader(f"Hospital Level Status in {selected_district} District:")
-    hosp_data = df_hospital[df_hospital['District'] == selected_district]
+    hosp_data = df[df['District'] == selected_district]
     if covid_vacant:
         hosp_data = hosp_data[hosp_data['COVID BEDS_Vacant'] > 0]
-    show_cols = ["Institution", "Contact Number","Last updated","COVID BEDS_Vacant", "ICU BEDS_Vacant", "VENTILATOR_Vacant", 
+
+
+    show_cols = ["Institution", "Contact Number","Last updated","COVID BEDS_Vacant", "ICU BEDS_Vacant", "VENTILATOR_Vacant",
              "OXYGEN SUPPORTED BEDS_Vacant", "NON-OXYGEN SUPPORTED BEDS_Vacant", "COVID BEDS_Total","ICU BEDS_Total","VENTILATOR_Total",
             "OXYGEN SUPPORTED BEDS_Total", "NON-OXYGEN SUPPORTED BEDS_Total"]
     hosp_data = hosp_data[show_cols]
     hosp_data = hosp_data.sort_values(by=['Last updated','COVID BEDS_Vacant'], ascending=False)
-    st.write(hosp_data)
+
+    fmt = "%d-%m-%Y %H:%M"
+    styler = hosp_data.style.format(
+        {
+            "Last updated": lambda t: t.strftime(fmt),
+        }
+    )
+    st.dataframe(styler)

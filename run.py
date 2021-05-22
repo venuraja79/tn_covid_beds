@@ -1,50 +1,19 @@
-import pandas as pd
-from bs4 import BeautifulSoup
-import json
+# Scheduler to run in Heroku
+# THis is not used any more, instead we will use a cache mechanism
 
-covid_beds_url = "https://stopcorona.tn.gov.in/beds.php"
+# If you are interested to schedule one in Heroku, please add the below line to Procfile
+# clock: python run.py
 
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
+from bed_data import get_bed_data, get_district_summary
+from config import COVID_BEDS_URL
 
 def process_data():
-    import urllib.request
-    page = urllib.request.urlopen(covid_beds_url)
-
-    soup = BeautifulSoup(page.read())
-
-    table = soup.find("table", {"id": "dtBasicExample"})
-    df = pd.read_html(str(table))[0]
-
-    correct_cols = ["S.NO", "District", "Institution", "Last updated", "Contact Number","Remarks"]
-
-    new_cols = [f"{column[0]}_{column[1]}" if column[0]!=column[1] else column[0] for column in df.columns]
-    df.columns = new_cols
-
-    df['Last updated'] = pd.to_datetime(df['Last updated'])
-    df['Contact Number'] = df['Contact Number'].astype(str)
-    df['Remarks'] = df['Remarks'].astype(str) 
-
-    with open('geo_districts.json',"r") as f:
-        data = json.loads(f.read())
-
-    df_geo = pd.DataFrame(data.get('geo_data'))
-    print(df_geo.shape)
-
-    df_district = df.groupby('District', as_index=False).sum()
-    print(df_district.shape)
-
-    df_district = pd.merge(
-        df_district,
-        df_geo,
-        how="inner",
-        left_on="District",
-        right_on="district"
-    )
+    df = get_bed_data(COVID_BEDS_URL)
+    df_district = get_district_summary(df)
 
     # Save all files
-    df.to_csv(path_or_buf="tn_covid_beds.csv", mode='w')
-    df_district.to_csv(path_or_buf="tn_covid_district_beds.csv", mode='w')
+    df.to_csv(path_or_buf="./data/tn_covid_beds.csv", mode='w')
+    df_district.to_csv(path_or_buf="./data/tn_covid_district_beds.csv", mode='w')
 
 # Schedule the job
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -59,7 +28,3 @@ def timed_job():
     print(f"Data Refresh was successful!")
 
 sched.start()
-
-if __name__ == '__main__':
-    process_data()
-    print(f"Data Refresh was successful!")
