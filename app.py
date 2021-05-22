@@ -37,10 +37,6 @@ data_columns = ['District','latitude','longitude','COVID BEDS_Vacant']
 data = df[data_columns]
 data.loc[:,"Value"] = data.loc[:, "COVID BEDS_Vacant"]
 
-districts = data['District'].unique()
-selected_district = st.sidebar.selectbox("Select a District to see Hospital level beds", districts)
-st.sidebar.markdown("---")
-
 COLOUR_RANGE = [
     [0,240,0,220],
     [0,200,0,220],
@@ -118,9 +114,15 @@ st.pydeck_chart(pdk.Deck(
     )
 )
 
+districts = data['District'].unique()
+selected_district = st.selectbox("Select a District to see Hospital level beds", districts)
+
+covid_vacant = st.checkbox('Show only hospitals with vacant covid beds')
 if selected_district:
     st.subheader(f"Hospital Level Status in {selected_district} District:")
     hosp_data = df_hospital[df_hospital['District'] == selected_district]
+    if covid_vacant:
+        hosp_data = hosp_data[hosp_data['COVID BEDS_Vacant'] > 0]
     show_cols = ["Institution", "Contact Number","Last updated","COVID BEDS_Vacant", "ICU BEDS_Vacant", "VENTILATOR_Vacant", 
              "OXYGEN SUPPORTED BEDS_Vacant", "NON-OXYGEN SUPPORTED BEDS_Vacant", "COVID BEDS_Total","ICU BEDS_Total","VENTILATOR_Total",
             "OXYGEN SUPPORTED BEDS_Total", "NON-OXYGEN SUPPORTED BEDS_Total"]
