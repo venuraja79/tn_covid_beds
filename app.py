@@ -16,13 +16,12 @@ try:
     import time
     last_run = os.path.getmtime("tn_covid_beds.csv")
     last_run = time.strftime('%d-%m-%Y %H:%M:%S', time.gmtime(last_run))
-    st.sidebar.markdown(f"Last Run : {last_run} GMT")
+    st.sidebar.markdown(f"Last Updated : {last_run} GMT")
 except:
     pass
 
 st.sidebar.header('About')
-st.sidebar.info('Tamil Nadu Hospitals Corona Bed Status. The data is sourced from https://stopcorona.tn.gov.in/beds.php \n\n' + \
-    'Contact: http://sol-ai.in/')
+st.sidebar.info('Tamil Nadu Hospitals Corona Bed Status. The data is sourced from https://stopcorona.tn.gov.in/beds.php \n\n')
 st.sidebar.markdown('GitHub [Link](https://github.com/venuraja79/tn_covid_beds)')
 
 @st.cache
