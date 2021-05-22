@@ -59,7 +59,7 @@ setup(
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     dependency_links=dependency_links,
     install_requires=parsed_requirements,
-    python_requires=">=3.8.0",
+    python_requires=">=3.7.0",
     tests_require=["pytest"],
     classifiers=[
         "License :: OSI Approved :: Apache Software License",

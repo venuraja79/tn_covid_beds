@@ -4,3 +4,8 @@ beautifulsoup4
 APScheduler==3.0.0
 lxml==4.6.3
 retry
+gunicorn
+uvicorn
+fastapi
+uvloop
+httptools
