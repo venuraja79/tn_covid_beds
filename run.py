@@ -58,6 +58,8 @@ def timed_job():
     process_data()
     print(f"Data Refresh was successful!")
 
+sched.start()
+
 if __name__ == '__main__':
     process_data()
     print(f"Data Refresh was successful!")
