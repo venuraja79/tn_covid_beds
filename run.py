@@ -43,8 +43,8 @@ def process_data():
     )
 
     # Save all files
-    df.to_csv("tn_covid_beds.csv")
-    df_district.to_csv("tn_covid_district_beds.csv")
+    df.to_csv(path_or_buf="tn_covid_beds.csv", mode='w')
+    df_district.to_csv(path_or_buf="tn_covid_district_beds.csv", mode='w')
 
 # Schedule the job
 from apscheduler.schedulers.blocking import BlockingScheduler
