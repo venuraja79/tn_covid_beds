@@ -52,7 +52,7 @@ sched = BlockingScheduler()
 
 from config import DATA_REFRESH_INTERVAL
 
-@sched.scheduled_job('interval', minutes=DATA_REFRESH_INTERVAL)
+@sched.scheduled_job('interval', minutes=int(DATA_REFRESH_INTERVAL))
 def timed_job():
     print('The refresh data job is starting now!')
     process_data()
