@@ -12,7 +12,7 @@ logger.setLevel(LOG_LEVEL)
 
 router = APIRouter()
 
-@router.post("/api/v1/data")
+@router.get("/api/v1/data")
 def get_data():
     '''
     Get the latest covid bed data from covid website

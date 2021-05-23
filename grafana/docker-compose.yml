@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    grafana:
+        image: grafana/grafana
+        container_name: grafana
+        volumes:
+            - $PWD:/usr/share/tn_covid_beds
+            - $PWD/grafana.ini:/etc/grafana/grafana.ini:ro            
+        environment:                        
+            - "GF_INSTALL_PLUGINS=grafana-worldmap-panel,marcusolsson-csv-datasource,yesoreyeram-infinity-datasource"            
+        ports:
+        - 3000:3000      
+    scrapedata:
+        image: scrapedata
+        container_name: scrapedata
+        ports:
+        - 8000:8000    
