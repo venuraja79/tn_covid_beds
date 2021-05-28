@@ -1,0 +1,260 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "circleMaxSize": 30,
+      "circleMinSize": 2,
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)",
+        "#FADE2A"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "esMetric": "Count",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 13,
+        "x": 0,
+        "y": 0
+      },
+      "hideEmpty": true,
+      "hideZero": true,
+      "id": 2,
+      "initialZoom": "6",
+      "jsonUrl": "",
+      "locationData": "table",
+      "mapCenter": "custom",
+      "mapCenterLatitude": "11° 7' 37.6428''",
+      "mapCenterLongitude": "78° 39' 24.8076'' ",
+      "maxDataPoints": 1,
+      "mouseWheelZoom": true,
+      "pluginVersion": "7.5.6",
+      "showLegend": true,
+      "stickyLabels": false,
+      "tableQueryOptions": {
+        "geohashField": "geohash",
+        "labelField": "district",
+        "latitudeField": "latitude",
+        "longitudeField": "longitude",
+        "metricField": "COVID BEDS_Vacant",
+        "queryType": "coordinates"
+      },
+      "targets": [
+        {
+          "decimalSeparator": ".",
+          "delimiter": ",",
+          "header": true,
+          "ignoreUnknown": true,
+          "path": "tn_covid_district_beds.csv",
+          "refId": "A",
+          "schema": [
+            {
+              "name": "latitude",
+              "type": "string"
+            },
+            {
+              "name": "longitude",
+              "type": "string"
+            },
+            {
+              "name": "district",
+              "type": "string"
+            },
+            {
+              "name": "COVID BEDS_Vacant",
+              "type": "string"
+            }
+          ],
+          "skipRows": 0
+        }
+      ],
+      "thresholds": "10,50,500",
+      "title": "Bed Availability",
+      "type": "grafana-worldmap-panel",
+      "unitPlural": "",
+      "unitSingle": "",
+      "unitSingular": "",
+      "valueName": "total"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 11,
+        "x": 13,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "showHeader": true
+      },
+      "pluginVersion": "7.5.6",
+      "targets": [
+        {
+          "decimalSeparator": ".",
+          "delimiter": ",",
+          "header": true,
+          "ignoreUnknown": true,
+          "path": "tn_covid_district_beds.csv",
+          "refId": "A",
+          "schema": [
+            {
+              "name": "District",
+              "type": "string"
+            },
+            {
+              "name": "COVID BEDS_Total",
+              "type": "string"
+            },
+            {
+              "name": "COVID BEDS_Occupied",
+              "type": "string"
+            },
+            {
+              "name": "COVID BEDS_Vacant",
+              "type": "string"
+            }
+          ],
+          "skipRows": 0
+        }
+      ],
+      "title": "Bed Vacancy Report",
+      "type": "table"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 13,
+        "x": 0,
+        "y": 10
+      },
+      "id": 6,
+      "options": {
+        "showHeader": true
+      },
+      "pluginVersion": "7.5.6",
+      "targets": [
+        {
+          "decimalSeparator": ".",
+          "delimiter": ",",
+          "header": true,
+          "ignoreUnknown": true,
+          "path": "tn_covid_district_beds.csv",
+          "refId": "A",
+          "schema": [
+            {
+              "name": "District",
+              "type": "string"
+            },
+            {
+              "name": "OXYGEN SUPPORTED BEDS_Total",
+              "type": "string"
+            },
+            {
+              "name": "OXYGEN SUPPORTED BEDS_Occupied",
+              "type": "string"
+            },
+            {
+              "name": "OXYGEN SUPPORTED BEDS_Vacant",
+              "type": "string"
+            }
+          ],
+          "skipRows": 0
+        }
+      ],
+      "title": "Oxygen Beds Availability",
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "TN Covid Bed Availability",
+  "uid": "uUQmQ5qGz",
+  "version": 18
+}
